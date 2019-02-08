@@ -1,15 +1,12 @@
-require('./services/passport');
+require('./authentication/passport');
+require('./db/mongoose');
 
 const express = require('express');
-const mongoose = require('mongoose');
 
-const authRoutes = require('./routes/authRoutes');
-const { mongoURI } = require('./config/key');
+const authRoutes = require('./authentication/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-mongoose.connect(mongoURI, { useNewUrlParser: true });
 
 authRoutes(app);
 
