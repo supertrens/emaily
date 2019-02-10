@@ -1,11 +1,14 @@
-const passport = require('passport');
+const {
+  authGoogleController,
+  googleCallbackController,
+  currentUserController,
+  logoutController
+} = require('./controller');
 
 module.exports = (app) => {
-  app.get('/auth/google',
-    passport.authenticate('google', {
-      scope: ['profile', 'email']
-    })
-  );
-
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get('/auth/google', authGoogleController);
+  app.get('/auth/google/callback', googleCallbackController);
+  
+  app.get('/api/logout',logoutController)
+  app.get('/api/current_user', currentUserController )
 }
