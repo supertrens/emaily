@@ -21,7 +21,8 @@ passport.use(
   new GoogleStrategy({
     clientID: googleClientID,
     clientSecret: googleClientSecret,
-    callbackURL: '/auth/google/callback'
+    callbackURL: '/auth/google/callback',
+    proxy:true
   }, validateGoogleProfile));
 
 async function validateGoogleProfile(accessToken, refreshToken, profile, done) {
