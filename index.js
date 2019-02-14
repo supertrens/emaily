@@ -2,8 +2,8 @@ require('./authentication/passport');
 require('./db/mongoose');
 
 const express = require('express');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
+const cookieSession = require('cookie-session');
 
 const authRoutes = require('./authentication/authRoutes');
 const { cookieKey } = require('./config/key');
@@ -14,16 +14,17 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cookieSession({
     name: 'session',
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    maxAge: 30 * 24 * 60 * 60 * 1000, // expired in 30 days
     keys: [cookieKey] // can add more keys, to be pick randomly if I want to
   })
 );
 
+// let express know that we are using passport to manage cookies/session
 app.use(passport.initialize());
 app.use(passport.session());
 
 authRoutes(app);
 
 app.listen(PORT, () => {
-  console.log('App is listening')
-})
+  console.log(`App is listening on port ${PORT}`)
+});

@@ -1,10 +1,12 @@
-const passport = require('passport');
+const passport =  require('passport');
 
-const authGoogleController = (req, res) => {
-  passport.authenticate('google', {
-    scope: ['profile', 'email']
-  })
-};
+const authGoogleController = passport.authenticate('google', {
+  scope: ['profile', 'email']
+});
+
+const googleCallbackController = passport.authenticate('google', (req , res) => {
+  console.log(res)
+})
 
 const currentUserController = (req, res) => {
   res.send(req.user);
@@ -13,13 +15,12 @@ const currentUserController = (req, res) => {
 const logoutController = (req, res) => {
   req.logout();
   res.send(req.user);
-}
+};
 
-const googleCallbackController = passport.authenticate('google');
 
 module.exports = {
   authGoogleController,
-  googleCallbackController,
   currentUserController,
-  logoutController
+  logoutController,
+  googleCallbackController
 }
