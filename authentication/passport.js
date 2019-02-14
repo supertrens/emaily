@@ -5,13 +5,10 @@ const { googleClientID, googleClientSecret } = require('./../config/key');
 const User = require('./../models/User');
 
 passport.serializeUser((user, done) => {
-  console.log('serialize')
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  console.log('deserialize')
-
   try {
     const user = await User.findById(id);
     done(null, user);
